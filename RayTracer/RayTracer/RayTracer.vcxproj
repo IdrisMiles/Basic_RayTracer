@@ -10,6 +10,39 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AbstractCamera.h" />
+    <ClInclude Include="include\AbstractPrimitive.h" />
+    <ClInclude Include="include\DistList.h" />
+    <ClInclude Include="include\Intersection.h" />
+    <ClInclude Include="include\LambertShader.h" />
+    <ClInclude Include="include\MathHelper.h" />
+    <ClInclude Include="include\MathPrint.h" />
+    <ClInclude Include="include\PinholeCamera.h" />
+    <ClInclude Include="include\PolynomialSolver.h" />
+    <ClInclude Include="include\Ray.h" />
+    <ClInclude Include="include\RayTracer.h" />
+    <ClInclude Include="include\Shader.h" />
+    <ClInclude Include="include\SpherePrimitive.h" />
+    <ClInclude Include="include\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AbstractCamera.cpp" />
+    <ClCompile Include="src\AbstractPrimitive.cpp" />
+    <ClCompile Include="src\DistList.cpp" />
+    <ClCompile Include="src\Intersection.cpp" />
+    <ClCompile Include="src\LambertShader.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MathHelper.cpp" />
+    <ClCompile Include="src\MathPrint.cpp" />
+    <ClCompile Include="src\PinholeCamera.cpp" />
+    <ClCompile Include="src\PolynomialSolver.cpp" />
+    <ClCompile Include="src\Ray.cpp" />
+    <ClCompile Include="src\RayTracer.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\SpherePrimitive.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FBCF1BF0-F3EB-4983-AB67-E02C702A3002}</ProjectGuid>
     <RootNamespace>RayTracer</RootNamespace>
@@ -46,6 +79,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Libraries\glm-0.9.7.4\glm;C:\Projects\Basic_RayTracer\RayTracer\RayTracer\include;%(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -65,33 +99,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="AbstractPrimitive.cpp" />
-    <ClCompile Include="DistList.cpp" />
-    <ClCompile Include="Intersection.cpp" />
-    <ClCompile Include="LambertShader.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MathHelper.cpp" />
-    <ClCompile Include="PolynomialSolver.cpp" />
-    <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="RayTracer.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SpherePrimitive.cpp" />
-    <ClCompile Include="Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AbstractPrimitive.h" />
-    <ClInclude Include="DistList.h" />
-    <ClInclude Include="Intersection.h" />
-    <ClInclude Include="LambertShader.h" />
-    <ClInclude Include="MathHelper.h" />
-    <ClInclude Include="PolynomialSolver.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="RayTracer.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="SpherePrimitive.h" />
-    <ClInclude Include="Transform.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,5 +1,6 @@
 #include "SpherePrimitive.h"
 #include "PolynomialSolver.h"
+#include "MathPrint.h"
 
 SpherePrimitive::SpherePrimitive(glm::vec4 _centre, double _rad)
 {
@@ -31,6 +32,7 @@ DistList SpherePrimitive::Intersect(Ray &_ray)
 	c[2] = glm::dot(invRay.m_dir, invRay.m_dir);
 	c[1] = 2 * glm::dot(glm::vec3(pointMC), invRay.m_dir);
 	c[0] = glm::dot(pointMC, pointMC) - (m_radius*m_radius);
+
 
 	// solve quadratic equation
 	PolynomialSolver::QuadraticRoots(roots, c[2], c[1], c[0]);

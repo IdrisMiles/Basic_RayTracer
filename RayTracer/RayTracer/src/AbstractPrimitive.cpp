@@ -3,6 +3,7 @@
 
 AbstractPrimitive::AbstractPrimitive()
 {
+	m_trans = Transform();
 }
 
 

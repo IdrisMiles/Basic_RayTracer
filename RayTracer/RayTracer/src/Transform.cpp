@@ -1,9 +1,16 @@
 #include "Transform.h"
+#include "MathPrint.h"
 
 //--------------------------------------------------------------
 // Ctors and Dtors
 Transform::Transform()
 {
+	m_trans = glm::mat4(1.0f);
+	m_transDir = glm::mat3(m_trans);
+	m_invTrans = glm::inverse(m_trans);
+
+	MathPrint::PrintMat4(m_trans);
+
 }
 
 

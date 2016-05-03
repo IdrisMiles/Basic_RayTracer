@@ -31,12 +31,12 @@ void RayTracer::Render()
 		for (int y = 0; y < m_height; y++)
 		{
 			// produce ray for this pixel
-			Ray sourceRay = Ray(glm::vec4(0.0f, 0.0f, -10.0f, 1.0f), glm::vec3(0.0f, 0.0f, 10.0f));
+			Ray sourceRay = Ray(glm::vec4(0.0f, 0.0f, -10.0f, 1.0f), glm::vec3(0.1f*(x - (m_width*0.5f)), 0.1f*(y - (m_height*0.5f)), 10.0f));
 
 			// initialise object list, min dist and PixelColour
 			glm::vec3 pixelCol(0.0f, 0.0f, 0.0f);
 			DistList intersectionDistanceList;
-			double minIntersectionDist = 10000000000000000000000.0;
+			double minIntersectionDist = 1e20;
 			Intersection currentIntersection;			
 
 			// Foreach object 
@@ -45,14 +45,16 @@ void RayTracer::Render()
 			{
 				intersectionDistanceList = (*mesh)->Intersect(sourceRay);
 				// check if ray intersects
-				if (false || intersectionDistanceList.m_dist.size() != 0)
+				if (intersectionDistanceList.m_dist.size() != 0)
 				{
+					std::cout << "Intersection \n";
 					// check if intersect dist is less than current min
 					if (intersectionDistanceList.m_dist[0] < minIntersectionDist)
 					{
 						// update min dist and current interescted obj
 						minIntersectionDist = intersectionDistanceList.m_dist[0];
 						currentIntersection.m_Prim = *mesh;
+						std::cout << "New min dist \n";
 					}
 				}
 			}
@@ -71,7 +73,13 @@ void RayTracer::Render()
 						// PixelColour += Get shaded colour given light source and object material
 			// else
 				// PixelColour = background
+
 		}
+
 	}
+
+	std::cout << "Rendering finished\n";
+	int end;
+	std::cin >> end;
 
 }
