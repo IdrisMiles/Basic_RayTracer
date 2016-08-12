@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SpherePrimitive.h"
+#include "Scene.h"
 
 
 class RayTracer
@@ -10,13 +10,15 @@ public:
 	~RayTracer();
 
 	void Render();
+	glm::vec3 TraceRay(const Ray &_sourceRay);
 
 	unsigned int m_width;
 	unsigned int m_height;
 
-	glm::vec3 *m_pixels;
+	std::vector<glm::vec3> m_pixels;
+	
 
-	std::vector<AbstractPrimitive*> m_meshes;
+	Scene *m_scene;
 	
 };
 

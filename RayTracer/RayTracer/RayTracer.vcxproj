@@ -19,9 +19,11 @@
     <ClInclude Include="include\MathHelper.h" />
     <ClInclude Include="include\MathPrint.h" />
     <ClInclude Include="include\PinholeCamera.h" />
+    <ClInclude Include="include\point.h" />
     <ClInclude Include="include\PolynomialSolver.h" />
     <ClInclude Include="include\Ray.h" />
     <ClInclude Include="include\RayTracer.h" />
+    <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\SpherePrimitive.h" />
     <ClInclude Include="include\Transform.h" />
@@ -36,9 +38,11 @@
     <ClCompile Include="src\MathHelper.cpp" />
     <ClCompile Include="src\MathPrint.cpp" />
     <ClCompile Include="src\PinholeCamera.cpp" />
+    <ClCompile Include="src\point.cpp" />
     <ClCompile Include="src\PolynomialSolver.cpp" />
     <ClCompile Include="src\Ray.cpp" />
     <ClCompile Include="src\RayTracer.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\SpherePrimitive.cpp" />
     <ClCompile Include="src\Transform.cpp" />
@@ -72,17 +76,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Libraries\glm;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Dev\FreeImage\Dist\x32;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Dev\FreeImage\Dist\x32;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Dev\FreeImage\Dist\x32\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Dev\FreeImage\Dist\x32\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Libraries\glm-0.9.7.4\glm;C:\Projects\Basic_RayTracer\RayTracer\RayTracer\include;%(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\FreeImage\Dist\x32;C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\RayTracer\include;%(ProjectDir)\include;C:\Dev\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Dev\FreeImage\Dist\x32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,11 +103,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Dev\FreeImage\Dist\x32\;C:\Dev\glm\;C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\RayTracer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Dev\FreeImage\Dist\x32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

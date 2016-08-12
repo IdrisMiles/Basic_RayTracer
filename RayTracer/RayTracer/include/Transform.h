@@ -25,13 +25,16 @@ public:
 
 
 
+
 	//--------------------------------------------------------------
 	// Member functions
 
 	// Transforms a point - scale, translation, rotation, shear
+	glm::vec4 TransformPoint(const glm::vec3 &_point);
 	glm::vec4 TransformPoint(const glm::vec4 &_point);
 	
 	// Transforms a point - scale, translation, rotation, shear
+	glm::vec4 TransformPointInverse(const glm::vec3 &_point);
 	glm::vec4 TransformPointInverse(const glm::vec4 &_point);
 
 	// Transform a direction vector - scale, rotation
@@ -41,8 +44,7 @@ public:
 	glm::vec3 TransformNormal(const glm::vec3 &_normal);
 
 private:
-	glm::mat4 m_trans;
+	glm::mat4 m_transform;
 	glm::mat4 m_invTrans;
-	glm::mat3 m_transDir;
 };
 

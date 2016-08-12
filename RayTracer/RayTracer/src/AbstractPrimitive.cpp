@@ -3,7 +3,7 @@
 
 AbstractPrimitive::AbstractPrimitive()
 {
-	m_trans = Transform();
+	m_transform = Transform();
 }
 
 
@@ -14,6 +14,6 @@ AbstractPrimitive::~AbstractPrimitive()
 
 void AbstractPrimitive::TransformPrim(glm::mat4 &_trans)
 {
-	glm::mat4 m = m_trans.GetTransformMat();
-	m_trans.SetTransfromMat(m * _trans);
+	glm::mat4 m = m_transform.GetTransformMat();
+	m_transform.SetTransfromMat(m * _trans);
 }

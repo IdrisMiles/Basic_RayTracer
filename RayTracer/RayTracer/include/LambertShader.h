@@ -8,9 +8,9 @@ public:
 	~LambertShader();
 
 
-	glm::vec3 Shade(const glm::vec3 &_point, const glm::vec3 &_surfColour, const glm::vec3 &_surfNormal,
-		const glm::vec3 &_warpNormal, const Ray &_viewRay, const glm::vec3 &_lightPos,
-		const glm::vec3 &_lightColour, const glm::vec3 &_shadowColour);
+	glm::vec3 Shade(const glm::vec3 &_point, const glm::vec3 &_surfNormal, const glm::vec3 &_surfColour,
+					const glm::vec3 &_warpNormal, const Ray &_viewRay, const glm::vec3 &_lightPos,
+					const glm::vec3 &_lightColour, const glm::vec3 &_shadowColour);
 
 
 

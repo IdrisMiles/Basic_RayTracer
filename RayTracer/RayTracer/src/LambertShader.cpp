@@ -16,7 +16,7 @@ LambertShader::~LambertShader()
 }
 
 
-glm::vec3 LambertShader::Shade(const glm::vec3 &_point, const glm::vec3 &_surfColour, const glm::vec3 &_surfNormal,
+glm::vec3 LambertShader::Shade(const glm::vec3 &_point,			const glm::vec3 &_surfNormal,	const glm::vec3 &_surfColour,
 								const glm::vec3 &_warpNormal,	const Ray &_viewRay,			const glm::vec3 &_lightPos,
 								const glm::vec3 &_lightColour,	const glm::vec3 &_shadowColour)
 {
@@ -26,7 +26,7 @@ glm::vec3 LambertShader::Shade(const glm::vec3 &_point, const glm::vec3 &_surfCo
 	glm::vec3 diffuseCol, specularCol, ambientCol;
 
 	// Get unit vectors for shading equations
-	unitEye = glm::normalize(_viewRay.m_dir);
+	unitEye = glm::normalize(-_viewRay.m_dir);
 	unitNorm = glm::normalize(_surfNormal);
 	
 	// Do this for each light:

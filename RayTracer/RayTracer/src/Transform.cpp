@@ -5,11 +5,8 @@
 // Ctors and Dtors
 Transform::Transform()
 {
-	m_trans = glm::mat4(1.0f);
-	m_transDir = glm::mat3(m_trans);
-	m_invTrans = glm::inverse(m_trans);
-
-	MathPrint::PrintMat4(m_trans);
+	m_transform = glm::mat4(1.0f);
+	m_invTrans = glm::inverse(m_transform);
 
 }
 
@@ -25,20 +22,19 @@ Transform::~Transform()
 
 void Transform::SetTransfromMat(const glm::mat4 &_mat)
 {
-	m_trans = _mat;
-	m_transDir = glm::mat3(m_trans);
-	m_invTrans = glm::inverse(m_trans);
+	m_transform = _mat;
+	m_invTrans = glm::inverse(m_transform);
 }
 
 
 glm::mat4 Transform::GetTransformMat() const
 {
-	return m_trans;
+	return m_transform;
 }
 
 glm::mat3 Transform::GetTransformDirMat() const
 {
-	return m_transDir;
+	return glm::mat3(m_transform);
 }
 
 glm::mat4 Transform::GetInvTransformMat() const
@@ -51,11 +47,19 @@ glm::mat4 Transform::GetInvTransformMat() const
 //--------------------------------------------------------------
 // Member functions
 
+glm::vec4 Transform::TransformPoint(const glm::vec3 &_point)
+{
+	return m_transform * glm::vec4(_point,1.0f);
+}
 glm::vec4 Transform::TransformPoint(const glm::vec4 &_point)
 {
-	return m_trans * _point;
+	return m_transform * _point;
 }
 
+glm::vec4 Transform::TransformPointInverse(const glm::vec3 &_point)
+{
+	return m_invTrans * glm::vec4(_point, 1.0f);
+}
 glm::vec4 Transform::TransformPointInverse(const glm::vec4 &_point)
 {
 	return m_invTrans * _point;
@@ -64,10 +68,10 @@ glm::vec4 Transform::TransformPointInverse(const glm::vec4 &_point)
 
 glm::vec3 Transform::TransformDir(const glm::vec3 &_dir)
 {
-	return m_transDir * _dir;
+	return glm::mat3(m_transform) * _dir;
 }
 
 glm::vec3 Transform::TransformNormal(const glm::vec3 &_normal)
 {
-	return glm::mat3(m_invTrans) * _normal;
+	return glm::transpose(glm::mat3(m_invTrans)) * _normal;
 }
