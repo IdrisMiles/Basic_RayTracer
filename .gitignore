@@ -27,3 +27,7 @@
 *.exe
 *.out
 *.app
+
+# VS stuff
+*.pdb
+*.sdf
