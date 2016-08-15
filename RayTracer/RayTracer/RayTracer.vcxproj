@@ -11,41 +11,51 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AbstractCamera.h" />
-    <ClInclude Include="include\AbstractPrimitive.h" />
-    <ClInclude Include="include\DistList.h" />
-    <ClInclude Include="include\Intersection.h" />
-    <ClInclude Include="include\LambertShader.h" />
-    <ClInclude Include="include\MathHelper.h" />
-    <ClInclude Include="include\MathPrint.h" />
-    <ClInclude Include="include\PinholeCamera.h" />
-    <ClInclude Include="include\point.h" />
-    <ClInclude Include="include\PolynomialSolver.h" />
-    <ClInclude Include="include\Ray.h" />
-    <ClInclude Include="include\RayTracer.h" />
-    <ClInclude Include="include\Scene.h" />
-    <ClInclude Include="include\Shader.h" />
-    <ClInclude Include="include\SpherePrimitive.h" />
-    <ClInclude Include="include\Transform.h" />
+    <ClCompile Include="src\Cameras\AbstractCamera.cpp" />
+    <ClCompile Include="src\Cameras\PinholeCamera.cpp" />
+    <ClCompile Include="src\Geometry\AbstractPrimitive.cpp" />
+    <ClCompile Include="src\Geometry\PlanePrimitive.cpp" />
+    <ClCompile Include="src\Geometry\SpherePrimitive.cpp" />
+    <ClCompile Include="src\Lights\AbstractLight.cpp" />
+    <ClCompile Include="src\Lights\PointLight.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Materials\AbstractMaterial.cpp" />
+    <ClCompile Include="src\Materials\BasicMaterial.cpp" />
+    <ClCompile Include="src\Maths\MathHelper.cpp" />
+    <ClCompile Include="src\Maths\MathPrint.cpp" />
+    <ClCompile Include="src\Maths\point.cpp" />
+    <ClCompile Include="src\Maths\PolynomialSolver.cpp" />
+    <ClCompile Include="src\Maths\Ray.cpp" />
+    <ClCompile Include="src\Maths\Transform.cpp" />
+    <ClCompile Include="src\Raytracer\DistList.cpp" />
+    <ClCompile Include="src\Raytracer\Intersection.cpp" />
+    <ClCompile Include="src\Raytracer\RayTracer.cpp" />
+    <ClCompile Include="src\Scenes\Scene.cpp" />
+    <ClCompile Include="src\Shaders\LambertShader.cpp" />
+    <ClCompile Include="src\Shaders\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AbstractCamera.cpp" />
-    <ClCompile Include="src\AbstractPrimitive.cpp" />
-    <ClCompile Include="src\DistList.cpp" />
-    <ClCompile Include="src\Intersection.cpp" />
-    <ClCompile Include="src\LambertShader.cpp" />
-    <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\MathHelper.cpp" />
-    <ClCompile Include="src\MathPrint.cpp" />
-    <ClCompile Include="src\PinholeCamera.cpp" />
-    <ClCompile Include="src\point.cpp" />
-    <ClCompile Include="src\PolynomialSolver.cpp" />
-    <ClCompile Include="src\Ray.cpp" />
-    <ClCompile Include="src\RayTracer.cpp" />
-    <ClCompile Include="src\Scene.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\SpherePrimitive.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
+    <ClInclude Include="include\Cameras\AbstractCamera.h" />
+    <ClInclude Include="include\Cameras\PinholeCamera.h" />
+    <ClInclude Include="include\Geometry\AbstractPrimitive.h" />
+    <ClInclude Include="include\Geometry\PlanePrimitive.h" />
+    <ClInclude Include="include\Geometry\SpherePrimitive.h" />
+    <ClInclude Include="include\Lights\AbstractLight.h" />
+    <ClInclude Include="include\Lights\PointLight.h" />
+    <ClInclude Include="include\Materials\AbstractMaterial.h" />
+    <ClInclude Include="include\Materials\BasicMaterial.h" />
+    <ClInclude Include="include\Maths\MathHelper.h" />
+    <ClInclude Include="include\Maths\MathPrint.h" />
+    <ClInclude Include="include\Maths\point.h" />
+    <ClInclude Include="include\Maths\PolynomialSolver.h" />
+    <ClInclude Include="include\Maths\Ray.h" />
+    <ClInclude Include="include\Maths\Transform.h" />
+    <ClInclude Include="include\Raytracer\DistList.h" />
+    <ClInclude Include="include\Raytracer\Intersection.h" />
+    <ClInclude Include="include\Raytracer\RayTracer.h" />
+    <ClInclude Include="include\Scenes\Scene.h" />
+    <ClInclude Include="include\Shaders\LambertShader.h" />
+    <ClInclude Include="include\Shaders\Shader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FBCF1BF0-F3EB-4983-AB67-E02C702A3002}</ProjectGuid>

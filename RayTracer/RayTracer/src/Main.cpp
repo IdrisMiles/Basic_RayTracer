@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "RayTracer.h"
+#include "Raytracer/RayTracer.h"
 
 int main(int argc, char* arv[])
 {
 	
-	RayTracer r = RayTracer(600, 400);
+	RayTracer r = RayTracer();
 	r.Render();
 
 	int end;

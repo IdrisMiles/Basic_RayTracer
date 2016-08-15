@@ -1,0 +1,57 @@
+﻿Build started 12/08/2016 18:59:53.
+     1>Project "C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\RayTracer\RayTracer.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Dev\FreeImage\Dist\x32 /IC:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\RayTracer\include /I\include /IC:\Dev\glm /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\AbstractCamera.cpp src\AbstractPrimitive.cpp src\DistList.cpp src\Intersection.cpp src\LambertShader.cpp src\Main.cpp src\MathHelper.cpp src\MathPrint.cpp src\PinholeCamera.cpp src\point.cpp src\PolynomialSolver.cpp src\Ray.cpp src\RayTracer.cpp src\Scene.cpp src\Shader.cpp src\SpherePrimitive.cpp src\Transform.cpp
+         Transform.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\include\mathprint.h(16): warning C4091: 'static ' : ignored on left of 'MathPrint' when no variable is declared
+         SpherePrimitive.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\include\mathprint.h(16): warning C4091: 'static ' : ignored on left of 'MathPrint' when no variable is declared
+         Shader.cpp
+         Scene.cpp
+         RayTracer.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\raytracer.cpp(40): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\raytracer.cpp(42): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\raytracer.cpp(78): warning C4018: '<' : signed/unsigned mismatch
+         Ray.cpp
+         PolynomialSolver.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\polynomialsolver.cpp(25): warning C4244: '=' : conversion from 'double' to 'short', possible loss of data
+         point.cpp
+         PinholeCamera.cpp
+         MathPrint.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\include\mathprint.h(16): warning C4091: 'static ' : ignored on left of 'MathPrint' when no variable is declared
+         MathHelper.cpp
+         Main.cpp
+         LambertShader.cpp
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\lambertshader.cpp(25): warning C4101: 'specularIntensity' : unreferenced local variable
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\lambertshader.cpp(25): warning C4101: 'nDotL' : unreferenced local variable
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\lambertshader.cpp(25): warning C4101: 'nDotV' : unreferenced local variable
+     1>c:\users\user\documents\projects\basic_raytracer\raytracer\raytracer\src\lambertshader.cpp(25): warning C4101: 'diffuseIntensity' : unreferenced local variable
+         Intersection.cpp
+         DistList.cpp
+         AbstractPrimitive.cpp
+         AbstractCamera.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\Debug\RayTracer.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Dev\FreeImage\Dist\x32 FreeImage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\Debug\RayTracer.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\Debug\RayTracer.lib" /MACHINE:X86 Debug\AbstractCamera.obj
+         Debug\AbstractPrimitive.obj
+         Debug\DistList.obj
+         Debug\Intersection.obj
+         Debug\LambertShader.obj
+         Debug\Main.obj
+         Debug\MathHelper.obj
+         Debug\MathPrint.obj
+         Debug\PinholeCamera.obj
+         Debug\point.obj
+         Debug\PolynomialSolver.obj
+         Debug\Ray.obj
+         Debug\RayTracer.obj
+         Debug\Scene.obj
+         Debug\Shader.obj
+         Debug\SpherePrimitive.obj
+         Debug\Transform.obj
+         RayTracer.vcxproj -> C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\Debug\RayTracer.exe
+     1>Done Building Project "C:\Users\User\Documents\Projects\Basic_RayTracer\RayTracer\RayTracer\RayTracer.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.67
