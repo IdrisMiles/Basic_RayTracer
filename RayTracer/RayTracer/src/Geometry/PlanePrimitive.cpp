@@ -58,21 +58,24 @@ glm::vec3 PlanePrimitive::Normal(const glm::vec4 &_point)
 //----------------------------------------------------------------------------------
 glm::vec3 PlanePrimitive::GetColour(const glm::vec4 &_point)
 {
+	glm::vec3 col(0.0f);
 
 	int checkSize = 2;
 	int x = (int)abs(_point.x/checkSize);
 	int z = (int)abs(_point.z/checkSize);
 
+	x += (_point.x < 0) ? 1 : 0;
+	z += (_point.z < 0) ? 1 : 0;
+
 	if ((x % 2 == 0 && z % 2 == 0) || (x % 2 == 1 && z % 2 == 1))
 	{
 		//printf("black\n");
-		return m_colour;
+		col =  m_colour;
 	}
 	else
 	{
-		glm::vec3 col = glm::vec3(1.0f) - m_colour;
-		//printf("white\n");
-		//printf("%f, %f, %f\n", col.x, col.y, col.z);
-		return col;
+		col = glm::vec3(1.0f) - m_colour;
 	}
+
+	return col;
 }

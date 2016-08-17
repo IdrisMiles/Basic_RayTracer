@@ -44,25 +44,25 @@ void RayTracer::Render()
 
 	std::cout << "rendering\n-------------------\n";
 
-	//glm::vec4 camPos = glm::vec4(0.0f, 0.0f, 10.0f, 1.0f);
-
 	
 	for (unsigned int y = 0; y < m_height; y++)
 	{
 		for (unsigned int x = 0; x < m_width; x++)
 		{
+			int coordIndex = COORD2DINDEX(x, y, m_width);
 
-			// produce ray for this pixel
-			Ray sourceRay = m_scene->m_camera->ComputeRay(x, y);//Ray(camPos, glm::normalize(glm::vec3(0.1f*(x - (m_width*0.5f)), 0.1f*(y - (m_height*0.5f)), -10.0f)));
-			m_pixels[COORD2DINDEX(x, y, m_width)] = TraceRay(sourceRay, 4);
+			for (int dofSample = 0; dofSample < m_scene->m_camera->m_numDofSamples; dofSample++)
+			{
+				// produce ray for this pixel
+				Ray sourceRay = m_scene->m_camera->ComputeRay(x, y, dofSample);
+				m_pixels[coordIndex] += TraceRay(sourceRay, 4);
+			}
+			m_pixels[coordIndex] /= (float)m_scene->m_camera->m_numDofSamples;
 
-			pixelColour.rgbRed = 255 * m_pixels[COORD2DINDEX(x, y, m_width)].x;
-			pixelColour.rgbGreen = 255 * m_pixels[COORD2DINDEX(x, y, m_width)].y;
-			pixelColour.rgbBlue = 255 * m_pixels[COORD2DINDEX(x, y, m_width)].z;
+			pixelColour.rgbRed = 255 * m_pixels[coordIndex].x;
+			pixelColour.rgbGreen = 255 * m_pixels[coordIndex].y;
+			pixelColour.rgbBlue = 255 * m_pixels[coordIndex].z;
 
-			// Image is stored top left to bottom right, 
-			// renderer traces rays from bottom left to top right
-			// So must reverse y
 			FreeImage_SetPixelColor(bitmap, x, y, &pixelColour);
 		}
 
@@ -139,7 +139,7 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 		// initialise vars
 		DistList shadowIntersectionDistanceList;
 		glm::vec3 shadowDir = glm::vec3((*light)->m_position - currentIntersection.m_Point);
-		double shadowMinIntersectionDist = shadowDir.length();
+		double shadowMinIntersectionDist = glm::length(shadowDir);
 		Intersection shadowCurrentIntersection;
 		glm::vec3 lightIntensity = (*light)->m_intensity;
 
@@ -173,28 +173,62 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 
 		// Shade with newly attenuated(or not) light
 		currentIntersection.m_Prim->m_material->m_surfaceColour = currentIntersection.m_Prim->GetColour(currentIntersection.m_Point);
-		pixelCol += currentIntersection.m_Prim->m_shader->Shade(glm::vec3(currentIntersection.m_Point), 
+		pixelCol += currentIntersection.m_Prim->m_shader->Shade(glm::vec3(currentIntersection.m_Point),
 																currentIntersection.m_Prim->Normal(currentIntersection.m_Point),
-																currentIntersection.m_Prim->m_material, 
-																_sourceRay, 
-																glm::vec3((*light)->m_position), 
+																currentIntersection.m_Prim->m_material,
+																_sourceRay,
+																glm::vec3((*light)->m_position),
 																lightIntensity);
-			
+		
 	} // Next light
 
 	if (_depth > 0)
 	{
+		glm::vec3 reflectionCol;
+		glm::vec3 refractionCol;
+		float bias = 0.01f;
 		glm::vec4 hitPoint = currentIntersection.m_Point;
 		glm::vec3 hitNorm = currentIntersection.m_Prim->Normal(currentIntersection.m_Point);
 
-		// Generate reflected ray
-		Ray reflectedRay = Ray(hitPoint, glm::reflect(_sourceRay.m_dir, hitNorm));
-		pixelCol += currentIntersection.m_Prim->m_material->m_reflectivity * TraceRay(reflectedRay, _depth - 1);
+		
+		bool inside = false;
 
-		// Generate refracted ray
+		if (glm::dot(_sourceRay.m_dir, hitNorm) > 0)
+		{
+			hitNorm = -hitNorm;
+			inside = true;
+		}
+		float facingRatio = -glm::dot(_sourceRay.m_dir, hitNorm);
+		float fresnelEffect = glm::mix(powf(1 - facingRatio, 3), 1.0f, 0.1f);
 
-		Ray refractedRay = Ray(hitPoint, glm::refract(_sourceRay.m_dir, hitNorm, currentIntersection.m_Prim->m_material->m_indexOfRefraction));
-		pixelCol += currentIntersection.m_Prim->m_material->m_transmittivity * TraceRay(refractedRay, _depth - 1);
+		
+		if (currentIntersection.m_Prim->m_material->m_reflectivity != glm::vec3(0.0f))
+		{
+			// Generate reflected ray
+			Ray reflectedRay = Ray(hitPoint, glm::reflect(_sourceRay.m_dir, hitNorm));
+			reflectionCol += currentIntersection.m_Prim->m_material->m_reflectivity * TraceRay(reflectedRay, _depth - 1);
+		}
+
+		
+		if (currentIntersection.m_Prim->m_material->m_transmittivity != glm::vec3(0.0f))
+		{
+			glm::vec3 refractedRayDir; 
+
+			float IoR = currentIntersection.m_Prim->m_material->m_indexOfRefraction;
+			float eta = inside ? IoR : 1.0f / IoR;
+			float cosI = -glm::dot(hitNorm, _sourceRay.m_dir);
+			float k = 1 - eta * eta  * (1 - cosI * cosI);
+			refractedRayDir = _sourceRay.m_dir * eta + hitNorm * (eta * cosI - sqrtf(k));
+			refractedRayDir = glm::refract(_sourceRay.m_dir, hitNorm, eta);
+
+			Ray refractedRay(hitPoint + glm::vec4(bias * refractedRayDir,0.0f), refractedRayDir);
+			refractionCol += currentIntersection.m_Prim->m_material->m_transmittivity * TraceRay(refractedRay, _depth - 1);
+
+			//reflectionCol *= fresnelEffect;
+			//refractionCol *= (1.0f - fresnelEffect);
+		}
+
+		pixelCol += (reflectionCol + refractionCol);
 		
 	}
 

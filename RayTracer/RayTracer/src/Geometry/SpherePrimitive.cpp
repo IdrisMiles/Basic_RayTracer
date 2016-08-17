@@ -32,12 +32,20 @@ DistList SpherePrimitive::Intersect(const Ray &_ray)
 	
 	float tca = glm::dot(pointToCentre, _ray.m_dir);
 	float d2 = glm::dot(pointToCentre, pointToCentre) - (tca*tca);
-	if (d2 < (m_radius*m_radius))
+	if (d2 <= (m_radius*m_radius))
 	{
 		float thc = sqrt((m_radius * m_radius) - d2);
-		result.m_dist.push_back(tca - thc);
-		result.m_dist.push_back(tca + thc);
+		
+		
+		if (tca - thc > 0.0f)
+		{
+			result.m_dist.push_back(tca - thc);
+		}
 
+		if(tca + thc > 0.0f)
+		{
+			result.m_dist.push_back(tca + thc);
+		}
 #if _DEBUG
 		printf("______________________\n");
 		printf("ray point\t: [%f,%f,%f]\n", invRay.m_point.x, invRay.m_point.y, invRay.m_point.z);

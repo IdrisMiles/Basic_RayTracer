@@ -1,0 +1,23 @@
+TODO list:
+___________________________________________________________________________________
+
+- Change all vec4 to vec3, and only cast to vec4 when doing matrix multiplications
+
+- Attenuate light source
+
+- Refracted ray, checking if inside or out side of mesh.
+
+- Add more geomtry primitives (triangle)
+
+
+
+
+- Add complex geometry
+
+- restructre scene class
+
+- load scene from file
+
+- Migrate to Qt
+
+- GUI to select scene file, save rendered image, view rendered image, view OpenGL pre-vis.
