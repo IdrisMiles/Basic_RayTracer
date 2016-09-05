@@ -12,6 +12,7 @@ public:
 	float m_indexOfRefraction;
 	
 	glm::vec3 m_surfaceColour;
+	glm::vec3 m_specularColour;
 	float m_specularExp;
 };
 

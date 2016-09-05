@@ -2,7 +2,7 @@
 #include "Maths/PolynomialSolver.h"
 #include "Maths/MathPrint.h"
 
-SpherePrimitive::SpherePrimitive(glm::vec4 _centre, double _rad, AbstractMaterial *_material, Shader *_shader)
+SpherePrimitive::SpherePrimitive(glm::vec3 _centre, double _rad, AbstractMaterial *_material, Shader *_shader)
 {
 	m_centre = _centre;
 	m_radius = _rad;
@@ -20,9 +20,9 @@ SpherePrimitive::~SpherePrimitive()
 }
 
 //----------------------------------------------------------------------------------
-DistList SpherePrimitive::Intersect(const Ray &_ray)
+bool SpherePrimitive::Intersect(DistList &_distList, const Ray &_ray)
 {
-	DistList result;
+	bool isIntersection = false;
 	PolyReturn roots;
 	glm::vec3 pointToCentre;
 	double c[3];
@@ -39,12 +39,14 @@ DistList SpherePrimitive::Intersect(const Ray &_ray)
 		
 		if (tca - thc > 0.0f)
 		{
-			result.m_dist.push_back(tca - thc);
+			_distList.m_dist.push_back(tca - thc);
+			isIntersection = true;
 		}
 
 		if(tca + thc > 0.0f)
 		{
-			result.m_dist.push_back(tca + thc);
+			_distList.m_dist.push_back(tca + thc);
+			isIntersection = true;
 		}
 #if _DEBUG
 		printf("______________________\n");
@@ -74,25 +76,25 @@ DistList SpherePrimitive::Intersect(const Ray &_ray)
 	}
 	//printf("\n");
 	*/
-	return result;
+	return isIntersection;
 }
 
 //----------------------------------------------------------------------------------
-bool SpherePrimitive::PointInside(const glm::vec4 &_point)
+bool SpherePrimitive::PointInside(const glm::vec3 &_point)
 {
-	glm::vec4 invPoint = m_transform.TransformPointInverse(_point);
+	glm::vec3 invPoint = m_transform.TransformPointInverse(_point);
 	return (glm::dot(invPoint, invPoint) < m_radius*m_radius);
 }
 
 //----------------------------------------------------------------------------------
-glm::vec3 SpherePrimitive::Normal(const glm::vec4 &_point)
+glm::vec3 SpherePrimitive::Normal(const glm::vec3 &_point)
 {
-	glm::vec4 invPoint = m_transform.TransformPointInverse(_point);
+	glm::vec3 invPoint = m_transform.TransformPointInverse(_point);
 	return glm::normalize(m_transform.TransformNormal(glm::vec3(invPoint - m_centre)));
 }
 
 //----------------------------------------------------------------------------------
-glm::vec3 SpherePrimitive::GetColour(const glm::vec4 &_point)
+glm::vec3 SpherePrimitive::GetColour(const glm::vec3 &_point)
 {
 	return m_colour;
 }

@@ -2,6 +2,7 @@
 
 #include "Geometry/SpherePrimitive.h"
 #include "Geometry/PlanePrimitive.h"
+#include "Geometry/TrianglePrimitive.h"
 #include "Lights/PointLight.h"
 #include "Cameras/PinholeCamera.h"
 

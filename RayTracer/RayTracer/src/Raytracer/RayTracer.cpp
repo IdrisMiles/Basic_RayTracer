@@ -98,9 +98,8 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 	std::vector<AbstractPrimitive*>::iterator mesh;
 	for (mesh = m_scene->m_meshes.begin(); mesh != m_scene->m_meshes.end(); ++mesh)
 	{
-		intersectionDistanceList = (*mesh)->Intersect(_sourceRay);
 		// check if ray intersects
-		if (intersectionDistanceList.m_dist.size() != 0)
+		if ((*mesh)->Intersect(intersectionDistanceList, _sourceRay))
 		{
 			// check if intersect dist is less than current min
 			for (unsigned int intersectPnts = 0; intersectPnts < intersectionDistanceList.m_dist.size(); intersectPnts++)
@@ -108,9 +107,10 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 				if (intersectionDistanceList.m_dist[intersectPnts] < minIntersectionDist && intersectionDistanceList.m_dist[intersectPnts] > EPSILON)
 				{
 					// update min dist and current interescted obj
-					minIntersectionDist = intersectionDistanceList.m_dist[0];
+					minIntersectionDist = intersectionDistanceList.m_dist[intersectPnts];
 					currentIntersection.m_Prim = *mesh;
-					currentIntersection.m_Point = _sourceRay.m_point + glm::vec4(((float)minIntersectionDist * glm::vec3(_sourceRay.m_dir)),0.0f);
+					currentIntersection.m_Point = _sourceRay.m_point + ((float)minIntersectionDist * _sourceRay.m_dir);
+					currentIntersection.m_dist = minIntersectionDist;
 				}
 			}
 		}
@@ -138,7 +138,7 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 	{
 		// initialise vars
 		DistList shadowIntersectionDistanceList;
-		glm::vec3 shadowDir = glm::vec3((*light)->m_position - currentIntersection.m_Point);
+		glm::vec3 shadowDir = (*light)->m_position - currentIntersection.m_Point;
 		double shadowMinIntersectionDist = glm::length(shadowDir);
 		Intersection shadowCurrentIntersection;
 		glm::vec3 lightIntensity = (*light)->m_intensity;
@@ -150,9 +150,8 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 		std::vector<AbstractPrimitive*>::iterator mesh;
 		for (mesh = m_scene->m_meshes.begin(); mesh != m_scene->m_meshes.end(); ++mesh)
 		{
-			shadowIntersectionDistanceList = (*mesh)->Intersect(shadowRay);
 			// check if ray intersects anything
-			if (shadowIntersectionDistanceList.m_dist.size() != 0)
+			if ((*mesh)->Intersect(shadowIntersectionDistanceList, shadowRay))
 			{
 				// check if intersect dist is less than current min or distance to light source
 				for (unsigned int intersectPnts = 0; intersectPnts < shadowIntersectionDistanceList.m_dist.size(); intersectPnts++)
@@ -160,9 +159,10 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 					if (shadowIntersectionDistanceList.m_dist[intersectPnts] < shadowMinIntersectionDist && shadowIntersectionDistanceList.m_dist[intersectPnts]>EPSILON)
 					{
 						// update min dist and current interescted obj
-						shadowMinIntersectionDist = shadowIntersectionDistanceList.m_dist[0];
+						shadowMinIntersectionDist = shadowIntersectionDistanceList.m_dist[intersectPnts];
 						shadowCurrentIntersection.m_Prim = *mesh;
-						shadowCurrentIntersection.m_Point = shadowRay.m_point + glm::vec4(((float)shadowMinIntersectionDist * glm::vec3(shadowRay.m_dir)), 0.0f);
+						shadowCurrentIntersection.m_Point = shadowRay.m_point + ((float)shadowMinIntersectionDist * shadowRay.m_dir);
+						shadowCurrentIntersection.m_dist = shadowMinIntersectionDist;
 
 						// Attenutate light by transmitivity of objects material
 						lightIntensity *= (*mesh)->m_material->m_transmittivity;
@@ -172,22 +172,26 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 		}
 
 		// Shade with newly attenuated(or not) light
+		//lightIntensity *= glm::exp(-(*light)->m_attenuation*shadowMinIntersectionDist);
 		currentIntersection.m_Prim->m_material->m_surfaceColour = currentIntersection.m_Prim->GetColour(currentIntersection.m_Point);
-		pixelCol += currentIntersection.m_Prim->m_shader->Shade(glm::vec3(currentIntersection.m_Point),
+		pixelCol += currentIntersection.m_Prim->m_shader->Shade(currentIntersection.m_Point,
 																currentIntersection.m_Prim->Normal(currentIntersection.m_Point),
 																currentIntersection.m_Prim->m_material,
 																_sourceRay,
-																glm::vec3((*light)->m_position),
+																(*light)->m_position,
 																lightIntensity);
 		
 	} // Next light
 
+
+	//----------------------------------------------------------------------------------------------------------
+	// recursive part of raytracing - reflection and refractions
 	if (_depth > 0)
 	{
 		glm::vec3 reflectionCol;
 		glm::vec3 refractionCol;
 		float bias = 0.01f;
-		glm::vec4 hitPoint = currentIntersection.m_Point;
+		glm::vec3 hitPoint = currentIntersection.m_Point;
 		glm::vec3 hitNorm = currentIntersection.m_Prim->Normal(currentIntersection.m_Point);
 
 		
@@ -198,21 +202,15 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 			hitNorm = -hitNorm;
 			inside = true;
 		}
-		float facingRatio = -glm::dot(_sourceRay.m_dir, hitNorm);
-		float fresnelEffect = glm::mix(powf(1 - facingRatio, 3), 1.0f, 0.1f);
-
 		
-		if (currentIntersection.m_Prim->m_material->m_reflectivity != glm::vec3(0.0f))
-		{
-			// Generate reflected ray
-			Ray reflectedRay = Ray(hitPoint, glm::reflect(_sourceRay.m_dir, hitNorm));
-			reflectionCol += currentIntersection.m_Prim->m_material->m_reflectivity * TraceRay(reflectedRay, _depth - 1);
-		}
 
-		
 		if (currentIntersection.m_Prim->m_material->m_transmittivity != glm::vec3(0.0f))
 		{
-			glm::vec3 refractedRayDir; 
+			// Transmitive material
+			glm::vec3 refractedRayDir;
+
+			float facingRatio = -glm::dot(_sourceRay.m_dir, hitNorm);
+			float fresnelEffect = glm::mix(powf(1 - facingRatio, 3), 1.0f, 0.1f);
 
 			float IoR = currentIntersection.m_Prim->m_material->m_indexOfRefraction;
 			float eta = inside ? IoR : 1.0f / IoR;
@@ -221,12 +219,26 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 			refractedRayDir = _sourceRay.m_dir * eta + hitNorm * (eta * cosI - sqrtf(k));
 			refractedRayDir = glm::refract(_sourceRay.m_dir, hitNorm, eta);
 
-			Ray refractedRay(hitPoint + glm::vec4(bias * refractedRayDir,0.0f), refractedRayDir);
+			Ray refractedRay(hitPoint + (bias * refractedRayDir), refractedRayDir);
 			refractionCol += currentIntersection.m_Prim->m_material->m_transmittivity * TraceRay(refractedRay, _depth - 1);
 
-			//reflectionCol *= fresnelEffect;
-			//refractionCol *= (1.0f - fresnelEffect);
+			// reflected ray for fresnel effect
+			Ray reflectedRay = Ray(hitPoint + (bias*hitNorm), glm::reflect(_sourceRay.m_dir, hitNorm));
+			reflectionCol += TraceRay(reflectedRay, _depth - 1);
+
+			// Apply fresnel effect
+			reflectionCol *= fresnelEffect;
+			refractionCol *= (1.0f - fresnelEffect);
 		}
+		else if (currentIntersection.m_Prim->m_material->m_reflectivity != glm::vec3(0.0f))
+		{
+			// reflective material
+
+			// Generate reflected ray
+			Ray reflectedRay = Ray(hitPoint + (bias*hitNorm), glm::reflect(_sourceRay.m_dir, hitNorm));
+			reflectionCol += currentIntersection.m_Prim->m_material->m_reflectivity * TraceRay(reflectedRay, _depth - 1);
+		}
+						
 
 		pixelCol += (reflectionCol + refractionCol);
 		

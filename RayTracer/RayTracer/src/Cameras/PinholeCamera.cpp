@@ -44,7 +44,7 @@ Ray PinholeCamera::ComputeRay(const int &_x, const int &_y)
 
 	glm::vec3 rayDir = glm::normalize((pixelScreenx*m_right) + (pixelScreeny*m_up) + (m_focalLength*m_forward));
 	glm::vec3 transformedRayDir = m_transform.TransformDir(rayDir);
-	glm::vec4 transformedEye = m_transform.TransformPoint(m_eye);
+	glm::vec3 transformedEye = m_transform.TransformPoint(m_eye);
 	Ray cameraRay(transformedEye, transformedRayDir);
 
 
@@ -70,7 +70,7 @@ Ray PinholeCamera::ComputeRay(const int &_x, const int &_y, const int &_sample)
 
 	if (_sample != 0)
 	{
-		apertureOffset = glm::vec3(glm::diskRand(m_aperture), 0.0f);// glm::vec3(glm::linearRand(-m_aperture, m_aperture), glm::linearRand(-m_aperture, m_aperture), 0.0f);
+		apertureOffset = glm::vec3(glm::diskRand(m_aperture), 0.0f);
 		forward = glm::normalize(m_focalPoint - (m_eye + apertureOffset));
 		right = (glm::cross(m_forward, m_worldUp));
 		up = (glm::cross(m_right, m_forward));
@@ -79,7 +79,7 @@ Ray PinholeCamera::ComputeRay(const int &_x, const int &_y, const int &_sample)
 		
 	glm::vec3 rayDir = glm::normalize((pixelScreenx*right) + (pixelScreeny*up) + (m_focalLength*forward));
 	glm::vec3 transformedRayDir = m_transform.TransformDir(rayDir);
-	glm::vec4 transformedEye = m_transform.TransformPoint(m_eye+apertureOffset);
+	glm::vec3 transformedEye = m_transform.TransformPoint(m_eye+apertureOffset);
 	Ray cameraRay(transformedEye, transformedRayDir);
 
 

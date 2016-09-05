@@ -47,18 +47,18 @@ glm::mat4 Transform::GetInvTransformMat() const
 //--------------------------------------------------------------
 // Member functions
 
-glm::vec4 Transform::TransformPoint(const glm::vec3 &_point)
+glm::vec3 Transform::TransformPoint(const glm::vec3 &_point)
 {
-	return m_transform * glm::vec4(_point,1.0f);
+	return glm::vec3(m_transform * glm::vec4(_point,1.0f));
 }
 glm::vec4 Transform::TransformPoint(const glm::vec4 &_point)
 {
 	return m_transform * _point;
 }
 
-glm::vec4 Transform::TransformPointInverse(const glm::vec3 &_point)
+glm::vec3 Transform::TransformPointInverse(const glm::vec3 &_point)
 {
-	return m_invTrans * glm::vec4(_point, 1.0f);
+	return glm::vec3(m_invTrans * glm::vec4(_point, 1.0f));
 }
 glm::vec4 Transform::TransformPointInverse(const glm::vec4 &_point)
 {

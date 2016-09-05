@@ -2,7 +2,7 @@
 #include "Maths/PolynomialSolver.h"
 
 
-PlanePrimitive::PlanePrimitive(glm::vec4 _centre, glm::vec3 _planeNormal, AbstractMaterial *_material, Shader *_shader)
+PlanePrimitive::PlanePrimitive(glm::vec3 _centre, glm::vec3 _planeNormal, AbstractMaterial *_material, Shader *_shader)
 {
 	m_centre = _centre;
 	m_planeNormal = glm::normalize(_planeNormal);
@@ -18,9 +18,8 @@ PlanePrimitive::~PlanePrimitive()
 
 
 //----------------------------------------------------------------------------------
-DistList PlanePrimitive::Intersect(const Ray &_ray)
+bool PlanePrimitive::Intersect(DistList &_distList, const Ray &_ray)
 {
-	DistList result;
 	Ray invRay;
 	
 	// transform ray into sphere space
@@ -31,32 +30,32 @@ DistList PlanePrimitive::Intersect(const Ray &_ray)
 	if (dirDotNorm == 0.0f)
 	{
 		// rays is parallel to plane so will never intersect
-		return result;
+		return false;
 	}
 
-	float rayPointDotNorm = glm::dot(glm::vec3(invRay.m_point), m_planeNormal);
-	float planePointDotNorm = glm::dot(glm::vec3(m_centre), m_planeNormal);
+	float rayPointDotNorm = glm::dot(invRay.m_point, m_planeNormal);
+	float planePointDotNorm = glm::dot(m_centre, m_planeNormal);
 	float t = -(rayPointDotNorm - planePointDotNorm) / (dirDotNorm);
 
-	result.m_dist.push_back(t);
+	_distList.m_dist.push_back(t);
 
-	return result;
+	return true;
 }
 
 //----------------------------------------------------------------------------------
-bool PlanePrimitive::PointInside(const glm::vec4 &_point)
+bool PlanePrimitive::PointInside(const glm::vec3 &_point)
 {
 	return false;
 }
 
 //----------------------------------------------------------------------------------
-glm::vec3 PlanePrimitive::Normal(const glm::vec4 &_point)
+glm::vec3 PlanePrimitive::Normal(const glm::vec3 &_point)
 {
 	return m_planeNormal;
 }
 
 //----------------------------------------------------------------------------------
-glm::vec3 PlanePrimitive::GetColour(const glm::vec4 &_point)
+glm::vec3 PlanePrimitive::GetColour(const glm::vec3 &_point)
 {
 	glm::vec3 col(0.0f);
 

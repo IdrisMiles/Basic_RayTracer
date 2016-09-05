@@ -16,6 +16,7 @@
     <ClCompile Include="src\Geometry\AbstractPrimitive.cpp" />
     <ClCompile Include="src\Geometry\PlanePrimitive.cpp" />
     <ClCompile Include="src\Geometry\SpherePrimitive.cpp" />
+    <ClCompile Include="src\Geometry\TrianglePrimitive.cpp" />
     <ClCompile Include="src\Lights\AbstractLight.cpp" />
     <ClCompile Include="src\Lights\PointLight.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="include\Geometry\AbstractPrimitive.h" />
     <ClInclude Include="include\Geometry\PlanePrimitive.h" />
     <ClInclude Include="include\Geometry\SpherePrimitive.h" />
+    <ClInclude Include="include\Geometry\TrianglePrimitive.h" />
     <ClInclude Include="include\Lights\AbstractLight.h" />
     <ClInclude Include="include\Lights\PointLight.h" />
     <ClInclude Include="include\Materials\AbstractMaterial.h" />

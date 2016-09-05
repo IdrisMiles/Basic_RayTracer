@@ -1,10 +1,12 @@
 #include "Lights/PointLight.h"
 
 
-PointLight::PointLight(glm::vec4 _position, glm::vec3 _intensity)
+PointLight::PointLight(glm::vec3 _position, glm::vec3 _intensity, float _attenuation)
 {
 	m_position = _position;
 	m_intensity = _intensity;
+	m_attenuation = _attenuation;
+
 }
 
 

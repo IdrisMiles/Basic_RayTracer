@@ -5,7 +5,7 @@
 class PointLight :	public AbstractLight
 {
 public:
-	PointLight(glm::vec4 _position, glm::vec3 _intensity);
+	PointLight(glm::vec3 _position, glm::vec3 _intensity, float _attenuation);
 	~PointLight();
 };
 

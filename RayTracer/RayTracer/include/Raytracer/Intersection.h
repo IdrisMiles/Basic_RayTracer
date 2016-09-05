@@ -8,8 +8,9 @@ public:
 	Intersection();
 	~Intersection();
 
-	glm::vec4 m_Point;
+	glm::vec3 m_Point;
 	AbstractPrimitive * m_Prim;
+	float m_dist;
 
 };
 
