@@ -1,4 +1,4 @@
-#include "Cameras\PinholeCamera.h"
+#include "Cameras/PinholeCamera.h"
 #include <iostream>
 #include <glm/gtc/random.hpp>
 

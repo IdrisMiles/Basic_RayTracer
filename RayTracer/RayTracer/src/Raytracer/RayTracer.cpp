@@ -69,10 +69,10 @@ void RayTracer::Render()
 	}
 
 	
-	if (FreeImage_Save(FIF_BMP, bitmap, "FinalRender.png"))
-	{
-		std::cout << "Successfully saved render\n";
-	}
+    if (FreeImage_Save(FIF_BMP, bitmap, "./FinalRender2.png"))
+    {
+        std::cout << "Successfully saved render\n";
+    }
 
 	FreeImage_Unload(bitmap);
 	FreeImage_DeInitialise();
@@ -173,7 +173,7 @@ glm::vec3 RayTracer::TraceRay(const Ray &_sourceRay, const int &_depth)
 
 		// Shade with newly attenuated(or not) light
 		//lightIntensity *= glm::exp(-(*light)->m_attenuation*shadowMinIntersectionDist);
-		currentIntersection.m_Prim->m_material->m_surfaceColour = currentIntersection.m_Prim->GetColour(currentIntersection.m_Point);
+        currentIntersection.m_Prim->m_material->m_surfaceColour = currentIntersection.m_Prim->GetColour(currentIntersection.m_Point);
 		pixelCol += currentIntersection.m_Prim->m_shader->Shade(currentIntersection.m_Point,
 																currentIntersection.m_Prim->Normal(currentIntersection.m_Point),
 																currentIntersection.m_Prim->m_material,

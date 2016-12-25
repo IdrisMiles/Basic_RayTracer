@@ -9,10 +9,10 @@ public:
 	SpherePrimitive(glm::vec3 _centre, double _rad, AbstractMaterial *_material, Shader *_shader);
 	~SpherePrimitive();
 
-	bool Intersect(DistList &_distList, const Ray &_ray);
-	bool PointInside(const glm::vec3 &_point);
-	glm::vec3 Normal(const glm::vec3 &_point);
-	glm::vec3 GetColour(const glm::vec3 &_point);
+    virtual bool Intersect(DistList &_distList, const Ray &_ray);
+    virtual bool PointInside(const glm::vec3 &_point);
+    virtual glm::vec3 Normal(const glm::vec3 &_point);
+    virtual glm::vec3 GetColour(const glm::vec3 &_point);
 
 	//------------------------------------------------------------
 

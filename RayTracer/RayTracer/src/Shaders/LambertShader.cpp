@@ -32,18 +32,18 @@ glm::vec3 LambertShader::Shade(const glm::vec3 &_point,			const glm::vec3 &_surf
 	unitRefL -= unitLight;
 
 	float normDotView = glm::dot(unitNorm, unitEye);
-	float  diffIntensity = glm::dot(unitNorm, unitLight);
+    float  diffIntensity = glm::dot(unitNorm, unitLight);
 	float specIntensity = glm::clamp(glm::dot(unitEye, unitRefL), 0.0f, 1.0f);
 
 	// check view and light vecots ~not on same side
-	if ((normDotView > 0 && diffIntensity > 0) || (normDotView < 0 && diffIntensity < 0))
+    if ((normDotView > 0.0f && diffIntensity > 0.0f) || (normDotView < 0.0f && diffIntensity < 0.0f))
 	{
 		// diffuse colour
-		diffuseCol += ((_mat->m_surfaceColour * _lightColour) * abs(diffIntensity) );
+        diffuseCol += ((_mat->m_surfaceColour * _lightColour) * (float)fabs(diffIntensity) );
 		//diffuseCol = glm::clamp(diffuseCol, glm::vec3(0.0f), glm::vec3(1.0f));
 
 		// Specular colour
-		specularCol += ((_lightColour) * pow(specIntensity, _mat->m_specularExp));
+        specularCol += ((_lightColour) * (float)pow(specIntensity, _mat->m_specularExp));
 		//specularCol = glm::clamp(specularCol, glm::vec3(0.0f), glm::vec3(1.0f));
 	}		
 

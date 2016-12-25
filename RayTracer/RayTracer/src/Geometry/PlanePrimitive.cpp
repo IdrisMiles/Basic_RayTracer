@@ -1,4 +1,4 @@
-#include "..\..\include\Geometry\PlanePrimitive.h"
+#include "Geometry/PlanePrimitive.h"
 #include "Maths/PolynomialSolver.h"
 
 

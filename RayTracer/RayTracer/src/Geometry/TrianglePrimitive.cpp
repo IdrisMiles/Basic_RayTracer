@@ -1,4 +1,4 @@
-#include "..\..\include\Geometry\TrianglePrimitive.h"
+#include "Geometry/TrianglePrimitive.h"
 
 
 TrianglePrimitive::TrianglePrimitive(glm::vec3 _verts[3], AbstractMaterial *_material, Shader *_shader)

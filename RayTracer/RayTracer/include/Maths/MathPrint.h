@@ -1,7 +1,8 @@
 #pragma once
 
-#include <glm\glm.hpp>
-static class MathPrint
+#include <glm/glm.hpp>
+
+class MathPrint
 {
 public:
 	MathPrint();
