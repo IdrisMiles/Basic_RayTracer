@@ -13,24 +13,23 @@ CONFIG += console c++11
 
 
 
-SOURCES += $$PWD/RayTracer/src/*.cpp \
-            $$PWD/RayTracer/src/Cameras/*.cpp \
-            $$PWD/RayTracer/src/Lights/*.cpp \
+SOURCES += $$PWD/RayTracer/src/*.cpp            \
+            $$PWD/RayTracer/src/Cameras/*.cpp   \
+            $$PWD/RayTracer/src/Lights/*.cpp    \
             $$PWD/RayTracer/src/Materials/*.cpp \
-            $$PWD/RayTracer/src/Shaders/*.cpp \
-            $$PWD/RayTracer/src/Geometry/*.cpp \
-            $$PWD/RayTracer/src/Maths/*.cpp \
-            $$PWD/RayTracer/src/Scenes/*.cpp \
+            $$PWD/RayTracer/src/Shaders/*.cpp   \
+            $$PWD/RayTracer/src/Geometry/*.cpp  \
+            $$PWD/RayTracer/src/Maths/*.cpp     \
+            $$PWD/RayTracer/src/Scenes/*.cpp    \
             $$PWD/RayTracer/src/Raytracer/*.cpp
 
-HEADERS  += $$PWD/RayTracer/include/*.h \
-            $$PWD/RayTracer/include/Cameras/*.h \
-            $$PWD/RayTracer/include/Lights/*.h \
-            $$PWD/RayTracer/include/Materials/*.h \
-            $$PWD/RayTracer/include/Shaders/*.h \
-            $$PWD/RayTracer/include/Geometry/*.h\
-            $$PWD/RayTracer/include/Maths/*.h \
-            $$PWD/RayTracer/include/Scenes/*.h \
+HEADERS  += $$PWD/RayTracer/include/Cameras/*.h     \
+            $$PWD/RayTracer/include/Lights/*.h      \
+            $$PWD/RayTracer/include/Materials/*.h   \
+            $$PWD/RayTracer/include/Shaders/*.h     \
+            $$PWD/RayTracer/include/Geometry/*.h    \
+            $$PWD/RayTracer/include/Maths/*.h       \
+            $$PWD/RayTracer/include/Scenes/*.h      \
             $$PWD/RayTracer/include/Raytracer/*.h
 
 

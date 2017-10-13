@@ -1,11 +1,14 @@
 #pragma once
+#ifndef _LAMBERTSHADER__H_
+#define _LAMBERTSHADER__H_
+
 #include "Shader.h"
 
 class LambertShader : public Shader
 {
 public:
 	LambertShader(double _ambient);
-	~LambertShader();
+    virtual ~LambertShader();
 
 
 	glm::vec3 Shade(const glm::vec3 &_point, const glm::vec3 &_surfNormal, AbstractMaterial *_mat,
@@ -17,3 +20,4 @@ public:
 	double m_ambient;
 };
 
+#endif //_LAMBERTSHADER__H_

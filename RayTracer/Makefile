@@ -243,8 +243,7 @@ DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/lex.prf \
-		RayTracer.pro RayTracer/include/*.h \
-		RayTracer/include/Cameras/AbstractCamera.h \
+		RayTracer.pro RayTracer/include/Cameras/AbstractCamera.h \
 		RayTracer/include/Cameras/PinholeCamera.h \
 		RayTracer/include/Lights/AbstractLight.h \
 		RayTracer/include/Lights/PointLight.h \
@@ -623,7 +622,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents RayTracer/include/*.h RayTracer/include/Cameras/AbstractCamera.h RayTracer/include/Cameras/PinholeCamera.h RayTracer/include/Lights/AbstractLight.h RayTracer/include/Lights/PointLight.h RayTracer/include/Materials/AbstractMaterial.h RayTracer/include/Materials/BasicMaterial.h RayTracer/include/Shaders/LambertShader.h RayTracer/include/Shaders/Shader.h RayTracer/include/Geometry/AbstractPrimitive.h RayTracer/include/Geometry/PlanePrimitive.h RayTracer/include/Geometry/SpherePrimitive.h RayTracer/include/Geometry/TrianglePrimitive.h RayTracer/include/Maths/MathHelper.h RayTracer/include/Maths/MathPrint.h RayTracer/include/Maths/point.h RayTracer/include/Maths/PolynomialSolver.h RayTracer/include/Maths/Ray.h RayTracer/include/Maths/Transform.h RayTracer/include/Scenes/Scene.h RayTracer/include/Raytracer/DistList.h RayTracer/include/Raytracer/Intersection.h RayTracer/include/Raytracer/RayTracer.h $(DISTDIR)/
+	$(COPY_FILE) --parents RayTracer/include/Cameras/AbstractCamera.h RayTracer/include/Cameras/PinholeCamera.h RayTracer/include/Lights/AbstractLight.h RayTracer/include/Lights/PointLight.h RayTracer/include/Materials/AbstractMaterial.h RayTracer/include/Materials/BasicMaterial.h RayTracer/include/Shaders/LambertShader.h RayTracer/include/Shaders/Shader.h RayTracer/include/Geometry/AbstractPrimitive.h RayTracer/include/Geometry/PlanePrimitive.h RayTracer/include/Geometry/SpherePrimitive.h RayTracer/include/Geometry/TrianglePrimitive.h RayTracer/include/Maths/MathHelper.h RayTracer/include/Maths/MathPrint.h RayTracer/include/Maths/point.h RayTracer/include/Maths/PolynomialSolver.h RayTracer/include/Maths/Ray.h RayTracer/include/Maths/Transform.h RayTracer/include/Scenes/Scene.h RayTracer/include/Raytracer/DistList.h RayTracer/include/Raytracer/Intersection.h RayTracer/include/Raytracer/RayTracer.h $(DISTDIR)/
 	$(COPY_FILE) --parents RayTracer/src/Main.cpp RayTracer/src/Cameras/AbstractCamera.cpp RayTracer/src/Cameras/PinholeCamera.cpp RayTracer/src/Lights/AbstractLight.cpp RayTracer/src/Lights/PointLight.cpp RayTracer/src/Materials/AbstractMaterial.cpp RayTracer/src/Materials/BasicMaterial.cpp RayTracer/src/Shaders/LambertShader.cpp RayTracer/src/Shaders/Shader.cpp RayTracer/src/Geometry/AbstractPrimitive.cpp RayTracer/src/Geometry/PlanePrimitive.cpp RayTracer/src/Geometry/SpherePrimitive.cpp RayTracer/src/Geometry/TrianglePrimitive.cpp RayTracer/src/Maths/MathHelper.cpp RayTracer/src/Maths/MathPrint.cpp RayTracer/src/Maths/point.cpp RayTracer/src/Maths/PolynomialSolver.cpp RayTracer/src/Maths/Ray.cpp RayTracer/src/Maths/Transform.cpp RayTracer/src/Scenes/Scene.cpp RayTracer/src/Raytracer/DistList.cpp RayTracer/src/Raytracer/Intersection.cpp RayTracer/src/Raytracer/RayTracer.cpp $(DISTDIR)/
 
 

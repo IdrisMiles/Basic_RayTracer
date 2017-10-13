@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _TRANSFORM__H_
+#define _TRANSFORM__H_
 
 #include <glm/glm.hpp>
 
@@ -48,3 +50,4 @@ private:
 	glm::mat4 m_invTrans;
 };
 
+#endif //_TRANSFORM__H_

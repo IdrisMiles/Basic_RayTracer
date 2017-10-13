@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _MATHHELPER__H_
+#define _MATHHELPER__H_
 
 static const double LARGE_VAL = 1e10;
 
@@ -16,3 +18,4 @@ public:
 
 };
 
+#endif //_MATHHELPER__H_

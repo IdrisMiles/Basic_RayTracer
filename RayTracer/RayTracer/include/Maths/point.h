@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _POINT__H_
+#define _POINT__H_
 
 #include <glm/glm.hpp>
 
@@ -9,3 +11,5 @@ public:
 	~point();
 };
 
+
+#endif //_POINT__H_

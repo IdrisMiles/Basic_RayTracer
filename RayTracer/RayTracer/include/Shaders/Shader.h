@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _SHADER__H_
+#define _SHADER__H_
 
 #include <glm/glm.hpp>
 #include "Maths/Ray.h"
@@ -9,7 +11,7 @@ class Shader
 {
 public:
 	Shader();
-	~Shader();
+    virtual ~Shader();
 
 
 	virtual glm::vec3 Shade(const glm::vec3 &_point, const glm::vec3 &_surfNormal, AbstractMaterial *_mat,
@@ -17,3 +19,5 @@ public:
 							const glm::vec3 &_lightColour) = 0;
 };
 
+
+#endif //_SHADER__H_

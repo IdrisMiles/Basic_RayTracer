@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _RAYTRACER__H_
+#define _RAYTRACER__H_
+
 
 #include "Scenes/Scene.h"
 #include "Cameras/PinholeCamera.h"
@@ -25,3 +28,4 @@ public:
 	
 };
 
+#endif //_RAYTRACER__H_

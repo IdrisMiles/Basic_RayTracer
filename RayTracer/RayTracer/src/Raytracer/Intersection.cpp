@@ -4,6 +4,7 @@
 
 Intersection::Intersection()
 {
+    m_Prim = nullptr;
 }
 
 

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _RAY__H_
+#define _RAY__H_
 
 #include <glm/glm.hpp>
 
@@ -13,3 +15,4 @@ public:
 	glm::vec3 m_dir;
 };
 
+#endif

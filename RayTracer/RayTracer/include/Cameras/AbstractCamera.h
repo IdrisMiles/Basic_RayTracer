@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _ABSTRACTCAMERA__H_
+#define _ABSTRACTCAMERA__H_
 
 #include "Maths/Ray.h"
 #include "Maths/Transform.h"
@@ -7,7 +9,7 @@ class AbstractCamera
 {
 public:
 	AbstractCamera();
-	~AbstractCamera();
+    virtual ~AbstractCamera();
 
 	virtual Ray ComputeRay(const int &_x, const int &_y) = 0;
 	virtual Ray ComputeRay(const int &_x, const int &_y, const int &_sample) = 0;
@@ -37,3 +39,4 @@ public:
 
 };
 
+#endif //_ABSTRACTCAMERA__H_

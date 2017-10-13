@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _POLYNOMIALSOLVER__H_
+#define _POLYNOMIALSOLVER__H_
 
 
 struct PolyReturn
@@ -27,3 +29,5 @@ public:
 	static void CubicRoots(PolyReturn &_result, double c3, double c2, double c1, double c0);
 };
 
+
+#endif //_POLYNOMIALSOLVER__H_

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _SCENE__H_
+#define _SCENE__H_
 
 #include "Geometry/SpherePrimitive.h"
 #include "Geometry/PlanePrimitive.h"
@@ -18,3 +20,4 @@ public:
 	AbstractCamera *m_camera;
 };
 
+#endif //_SCENE__H_

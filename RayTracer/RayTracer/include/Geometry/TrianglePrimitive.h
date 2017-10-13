@@ -1,4 +1,7 @@
-#pragma once
+
+#ifndef _TRIANGLEPRIMITIVE__H_
+#define _TRIANGLEPRIMITIVE__H_
+
 #include "AbstractPrimitive.h"
 
 
@@ -6,7 +9,7 @@ class TrianglePrimitive : public AbstractPrimitive
 {
 public:
 	TrianglePrimitive(glm::vec3 _verts[3], AbstractMaterial *_material, Shader *_shader);
-	~TrianglePrimitive();
+    virtual ~TrianglePrimitive();
 
     virtual bool Intersect(DistList &_distList, const Ray &_ray);
     virtual bool PointInside(const glm::vec3 &_point);
@@ -25,3 +28,4 @@ public:
 
 };
 
+#endif //_TRIANGLEPRIMITIVE__H_

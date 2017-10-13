@@ -9,6 +9,7 @@ PlanePrimitive::PlanePrimitive(glm::vec3 _centre, glm::vec3 _planeNormal, Abstra
 	m_material = _material; 
 	m_shader = _shader;
 	m_colour = m_material->m_surfaceColour;
+    m_name = "PlanePrimitive";
 }
 
 

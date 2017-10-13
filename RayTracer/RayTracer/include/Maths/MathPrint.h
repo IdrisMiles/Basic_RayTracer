@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _MATHPRINT__H_
+#define _MATHPRINT__H_
 
 #include <glm/glm.hpp>
 
@@ -16,3 +18,4 @@ public:
 
 };
 
+#endif //_MATHPRINT__H_

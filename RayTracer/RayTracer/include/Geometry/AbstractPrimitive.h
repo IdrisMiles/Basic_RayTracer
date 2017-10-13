@@ -1,4 +1,7 @@
-#pragma once
+#ifndef _ABSTRACTPRIMITIVE__H_
+#define _ABSTRACTPRIMITIVE__H_
+
+#include <string>
 
 #include "Maths/Transform.h"
 #include "Maths/Ray.h"
@@ -10,7 +13,7 @@ class AbstractPrimitive
 {
 public:
 	AbstractPrimitive();
-	~AbstractPrimitive();
+    virtual ~AbstractPrimitive();
 
 	void TransformPrim(glm::mat4 &_trans);
 	
@@ -24,5 +27,9 @@ public:
 	Transform m_transform;
 	glm::vec3 m_colour;
 	AbstractMaterial *m_material;
-	Shader *m_shader;
+    Shader *m_shader;
+    std::string m_name;
 };
+
+
+#endif //_ABSTRACTPRIMITIVE__H_

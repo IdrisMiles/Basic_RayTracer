@@ -36,3 +36,6 @@
 RayTracer/RayTracer/Debug
 RayTracer/RayTracer/Release
 RayTracer/Debug
+
+*.qmake.stash
+*.pro.user

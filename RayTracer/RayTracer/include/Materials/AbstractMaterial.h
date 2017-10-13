@@ -1,11 +1,14 @@
 #pragma once
+#ifndef _ABSTRACTMATERIAL__H_
+#define _ABSTRACTMATERIAL__H_
+
 #include <glm/glm.hpp>
 
 class AbstractMaterial
 {
 public:
 	AbstractMaterial();
-	~AbstractMaterial();
+    virtual ~AbstractMaterial();
 
 	glm::vec3 m_reflectivity;
 	glm::vec3 m_transmittivity;
@@ -16,3 +19,5 @@ public:
 	float m_specularExp;
 };
 
+
+#endif //_ABSTRACTMATERIAL__H_

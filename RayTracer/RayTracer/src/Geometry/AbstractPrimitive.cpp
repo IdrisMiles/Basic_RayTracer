@@ -4,6 +4,7 @@
 AbstractPrimitive::AbstractPrimitive()
 {
 	m_transform = Transform();
+    m_name = "AbstractPrimitive";
 }
 
 

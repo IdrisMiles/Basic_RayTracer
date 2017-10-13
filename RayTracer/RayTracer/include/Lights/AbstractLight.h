@@ -5,7 +5,7 @@ class AbstractLight
 {
 public:
 	AbstractLight();
-	~AbstractLight();
+    virtual ~AbstractLight();
 
 	glm::vec3 m_position;
 	glm::vec3 m_intensity;
